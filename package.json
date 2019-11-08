@@ -1,0 +1,28 @@
+{
+    "name": "cisc7019_project",
+    "version": "1.0.0",
+    "description": "This project is for the CISC7019 final project",
+    "main": "main.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "main": "tsc && node main.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Chonwai/CISC7019_Project.git"
+    },
+    "author": "Chonwai Un, Edison",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Chonwai/CISC7019_Project/issues"
+    },
+    "homepage": "https://github.com/Chonwai/CISC7019_Project#readme",
+    "dependencies": {
+        "@types/lodash": "^4.14.145",
+        "@types/node": "^12.12.6",
+        "lodash": "^4.17.15"
+    },
+    "devDependencies": {
+        "typescript": "^3.7.2"
+    }
+}
