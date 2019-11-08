@@ -5,7 +5,8 @@
     "main": "main.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "main": "tsc && node main.js"
+        "main": "tsc && node main.js",
+        "prettier": "prettier --write \"**/*.js\" \"**/*.ts\""
     },
     "repository": {
         "type": "git",
@@ -23,6 +24,7 @@
         "lodash": "^4.17.15"
     },
     "devDependencies": {
+        "prettier": "1.18.2",
         "typescript": "^3.7.2"
     }
 }
