@@ -31,3 +31,5 @@ class Graph {
         return this.edgesNumber;
     }
 }
+
+export default Graph;

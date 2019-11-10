@@ -17,8 +17,9 @@ class utils {
         let res = fs.readFileSync(path);
         data = res.toString().split('\n');
         let tempCol: Array<string> = [];
-        for (let i of data) {
-            tempCol = i.split(',');
+        for (let i: number = 1; i < data.length; i++) {
+            tempCol = data[i].split(',');
+            tempCol.splice(0, 1);
             relationMatrix.push(tempCol);
         }
         return relationMatrix;
