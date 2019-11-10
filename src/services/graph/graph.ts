@@ -1,8 +1,8 @@
 class Graph {
-    nodes: Array<number>
-    edges: Array<Array<number>>
-    edgesNumber: number
-    topicList: Array<string>
+    nodes: Array<number>;
+    edges: Array<Array<number>>;
+    edgesNumber: number;
+    topicList: Array<string>;
     constructor() {
         this.nodes = [];
         this.edges = [];
