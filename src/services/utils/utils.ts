@@ -1,14 +1,14 @@
 import fs from 'fs';
 
 class utils {
-    constructor() {
-        
-    }
-    async readGraph(path:string = '') {
-        let tempData:any = [];
-        await fs.readFile(path, (err, data) => {
-            tempData = data.toString();
-            // console.log(tempData[5]);
+    constructor() {}
+    readGraph(path: string = '') {
+        let tempData: any = [];
+        let data: any = [];
+        fs.readFile(path, async (err, res) => {
+            tempData = res.toString();
+            data = await tempData.split('\n');
+            console.log(data[0]);
         });
     }
 }
