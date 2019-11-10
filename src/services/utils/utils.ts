@@ -11,7 +11,7 @@ class utils {
             console.log(data[0]);
         });
     }
-    async readCSVData(path: string = '') {
+    readCSVData(path: string = ''): Array<Array<string>> {
         let data: Array<string> = [];
         let relationMatrix: Array<Array<string>> = [];
         let res = fs.readFileSync(path);
