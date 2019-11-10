@@ -1,5 +1,6 @@
 import Utils from './src/services/utils/utils';
 import Graph from './src/services/graph/graph';
+import PageRank from './src/services/pagerank/pagerank';
 
 function initGraph(data: Array<Array<string>>) {
     const graph = new Graph();
@@ -13,14 +14,18 @@ function initGraph(data: Array<Array<string>>) {
             }
         }
     }
-    return graph;
+    return graph.graph;
 }
 
 async function main(): Promise<any> {
     let utils: any = new Utils();
+    let graph: Array<Array<number>> = [];
     let data = [];
     data = await utils.readCSVData('./src/data/Facebook_Data.csv');
-    initGraph(data);
+    graph = initGraph(data);
+    let pagerank: any = new PageRank(graph, 100);
+    pagerank.init();
+    console.log(pagerank.rank);
 }
 
 main();

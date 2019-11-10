@@ -138,6 +138,7 @@ var __importDefault =
 Object.defineProperty(exports, '__esModule', { value: true });
 var utils_1 = __importDefault(require('./src/services/utils/utils'));
 var graph_1 = __importDefault(require('./src/services/graph/graph'));
+var pagerank_1 = __importDefault(require('./src/services/pagerank/pagerank'));
 function initGraph(data) {
     var graph = new graph_1.default();
     for (var i = 0; i < data.length; i++) {
@@ -150,20 +151,24 @@ function initGraph(data) {
             }
         }
     }
-    return graph;
+    return graph.graph;
 }
 function main() {
     return __awaiter(this, void 0, void 0, function() {
-        var utils, data;
+        var utils, graph, data, pagerank;
         return __generator(this, function(_a) {
             switch (_a.label) {
                 case 0:
                     utils = new utils_1.default();
+                    graph = [];
                     data = [];
                     return [4 /*yield*/, utils.readCSVData('./src/data/Facebook_Data.csv')];
                 case 1:
                     data = _a.sent();
-                    initGraph(data);
+                    graph = initGraph(data);
+                    pagerank = new pagerank_1.default(graph, 100);
+                    pagerank.init();
+                    console.log(pagerank.rank);
                     return [2 /*return*/];
             }
         });

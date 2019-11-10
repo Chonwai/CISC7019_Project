@@ -14,7 +14,6 @@ var PageRank = /** @class */ (function() {
         this.graph = [];
         this.maxInteraction = 100;
         this.d = 0.85;
-        this.initWeight = 1 / this.graph.length;
         this.rankingList = [];
         this.graph = graph;
         this.maxInteraction = maxInteraction;
@@ -22,9 +21,16 @@ var PageRank = /** @class */ (function() {
     }
     PageRank.prototype.init = function() {
         for (var i = 0; i < this.graph.length; i++) {
-            this.rankingList.push(this.initWeight);
+            this.rankingList.push(1 / this.graph.length);
         }
     };
+    Object.defineProperty(PageRank.prototype, 'rank', {
+        get: function() {
+            return this.rankingList;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return PageRank;
 })();
 exports.default = PageRank;
