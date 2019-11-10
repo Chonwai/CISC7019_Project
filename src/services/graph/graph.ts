@@ -14,4 +14,8 @@ class Graph {
         this.edges.push([]);
         this.topicList.push(topic);
     }
+    addEdge(from: number, to: number): void {
+        this.edges[from].push(to);
+        this.edgesNumber++;
+    }
 }

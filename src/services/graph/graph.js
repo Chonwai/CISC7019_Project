@@ -14,5 +14,9 @@ var Graph = /** @class */ (function() {
         this.edges.push([]);
         this.topicList.push(topic);
     };
+    Graph.prototype.addEdge = function(from, to) {
+        this.edges[from].push(to);
+        this.edgesNumber++;
+    };
     return Graph;
 })();
