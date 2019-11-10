@@ -13,7 +13,6 @@ function initGraph(data: Array<Array<string>>) {
             }
         }
     }
-    console.log(graph.graph);
     return graph;
 }
 
