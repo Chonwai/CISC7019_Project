@@ -15,8 +15,8 @@ var Graph = /** @class */ (function() {
         this.edges.push([]);
         this.topics.push(topic);
     };
-    Graph.prototype.addEdge = function(from, to) {
-        this.edges[from].push(to);
+    Graph.prototype.addEdge = function(to, from) {
+        this.edges[to].push(from);
         this.edgesNumber++;
     };
     Object.defineProperty(Graph.prototype, 'graph', {

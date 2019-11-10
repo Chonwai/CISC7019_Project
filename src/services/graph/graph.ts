@@ -14,8 +14,8 @@ class Graph {
         this.edges.push([]);
         this.topics.push(topic);
     }
-    addEdge(from: number, to: number): void {
-        this.edges[from].push(to);
+    addEdge(to: number, from: number): void {
+        this.edges[to].push(from);
         this.edgesNumber++;
     }
     get graph(): Array<Array<number>> {

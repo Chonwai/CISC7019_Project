@@ -13,6 +13,10 @@ class PageRank {
             this.rankingList.push(1 / this.graph.length);
         }
     }
+    ranking(): void {
+        let interaction: number = 0;
+        while (interaction < this.maxInteraction) {}
+    }
     get rank(): Array<number> {
         return this.rankingList;
     }

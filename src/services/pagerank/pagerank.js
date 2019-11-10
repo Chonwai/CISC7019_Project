@@ -24,6 +24,10 @@ var PageRank = /** @class */ (function() {
             this.rankingList.push(1 / this.graph.length);
         }
     };
+    PageRank.prototype.ranking = function() {
+        var interaction = 0;
+        while (interaction < this.maxInteraction) {}
+    };
     Object.defineProperty(PageRank.prototype, 'rank', {
         get: function() {
             return this.rankingList;
