@@ -162,6 +162,27 @@ var utils = /** @class */ (function() {
             });
         });
     };
+    utils.prototype.readCSVData = function(path) {
+        if (path === void 0) {
+            path = '';
+        }
+        return __awaiter(this, void 0, void 0, function() {
+            var data, relationMatrix, res, tempCol, _i, data_1, i;
+            return __generator(this, function(_a) {
+                data = [];
+                relationMatrix = [];
+                res = fs_1.default.readFileSync(path);
+                data = res.toString().split('\n');
+                tempCol = [];
+                for (_i = 0, data_1 = data; _i < data_1.length; _i++) {
+                    i = data_1[_i];
+                    tempCol = i.split(',');
+                    relationMatrix.push(tempCol);
+                }
+                return [2 /*return*/, relationMatrix];
+            });
+        });
+    };
     return utils;
 })();
 exports.default = utils;

@@ -11,6 +11,18 @@ class utils {
             console.log(data[0]);
         });
     }
+    async readCSVData(path: string = '') {
+        let data: Array<string> = [];
+        let relationMatrix: Array<Array<string>> = [];
+        let res = fs.readFileSync(path);
+        data = res.toString().split('\n');
+        let tempCol: Array<string> = [];
+        for (let i of data) {
+            tempCol = i.split(',');
+            relationMatrix.push(tempCol);
+        }
+        return relationMatrix;
+    }
 }
 
 export default utils;
