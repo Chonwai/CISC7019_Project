@@ -178,6 +178,17 @@ var utils = /** @class */ (function() {
         }
         return relationMatrix;
     };
+    utils.prototype.getMaxAndPos = function(array) {
+        var position = 0;
+        var maxVal = 0;
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] > maxVal) {
+                maxVal = array[i];
+                position = i;
+            }
+        }
+        return { maximun: maxVal, position: position };
+    };
     return utils;
 })();
 exports.default = utils;

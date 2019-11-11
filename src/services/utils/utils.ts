@@ -24,6 +24,17 @@ class utils {
         }
         return relationMatrix;
     }
+    getMaxAndPos(array: Array<number>): object {
+        let position: number = 0;
+        let maxVal: number = 0;
+        for (let i: number = 0; i < array.length; i++) {
+            if (array[i] > maxVal) {
+                maxVal = array[i];
+                position = i;
+            }
+        }
+        return { maximun: maxVal, position: position };
+    }
 }
 
 export default utils;

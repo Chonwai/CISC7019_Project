@@ -17,15 +17,18 @@ function initGraph(data: Array<Array<string>>) {
     return graph.graph;
 }
 
-async function main(): Promise<any> {
+async function main(): Promise<void> {
     let utils: any = new Utils();
     let graph: Array<Array<number>> = [];
     let data = [];
     data = await utils.readCSVData('./src/data/Facebook_Data.csv');
     graph = initGraph(data);
+
     let pagerank: any = new PageRank(graph, 100);
     pagerank.init();
+    pagerank.ranking();
     console.log(pagerank.rank);
+    console.log(pagerank.topWeight);
 }
 
 main();

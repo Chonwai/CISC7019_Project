@@ -168,7 +168,9 @@ function main() {
                     graph = initGraph(data);
                     pagerank = new pagerank_1.default(graph, 100);
                     pagerank.init();
+                    pagerank.ranking();
                     console.log(pagerank.rank);
+                    console.log(pagerank.topWeight);
                     return [2 /*return*/];
             }
         });
