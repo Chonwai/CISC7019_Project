@@ -2,6 +2,7 @@ class KMeans {
     k: number = 3;
     map: Array<Array<number>> = [];
     clustersList: Array<Array<number>> = [];
+    centersList: Array<Array<number>> = [];
     constructor(map: Array<Array<number>> = [], k: number = 3) {
         this.k = k;
         this.map = map;
@@ -9,6 +10,7 @@ class KMeans {
     init(): void {
         for (let i: number = 0; i < this.k; i++) {
             this.clustersList.push([]);
+            this.centersList.push([]);
         }
     }
     clustering(): void {}

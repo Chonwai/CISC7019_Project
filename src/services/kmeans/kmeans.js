@@ -11,12 +11,14 @@ var KMeans = /** @class */ (function() {
         this.k = 3;
         this.map = [];
         this.clustersList = [];
+        this.centersList = [];
         this.k = k;
         this.map = map;
     }
     KMeans.prototype.init = function() {
         for (var i = 0; i < this.k; i++) {
             this.clustersList.push([]);
+            this.centersList.push([]);
         }
     };
     KMeans.prototype.clustering = function() {};
