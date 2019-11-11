@@ -6,7 +6,7 @@ class Map {
         this.map.push([x, y]);
         this.amount++;
     }
-    get maps(): Array<Array<number>> {
+    get getmap(): Array<Array<number>> {
         return this.map;
     }
 }

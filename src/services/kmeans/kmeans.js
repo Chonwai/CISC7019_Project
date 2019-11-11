@@ -18,8 +18,9 @@ var KMeans = /** @class */ (function() {
     KMeans.prototype.init = function() {
         for (var i = 0; i < this.k; i++) {
             this.clustersList.push([]);
-            this.centersList.push([]);
+            this.centersList.push([Math.floor(Math.random() * 30), Math.floor(Math.random() * 30)]);
         }
+        console.log(this.centersList);
     };
     KMeans.prototype.clustering = function() {};
     Object.defineProperty(KMeans.prototype, 'clusters', {

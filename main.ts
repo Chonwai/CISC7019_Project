@@ -1,7 +1,7 @@
 import Utils from './src/services/utils/utils';
 import Graph from './src/services/graph/graph';
 import PageRank from './src/services/pagerank/pagerank';
-import utils from './src/services/utils/utils';
+import Map from './src/services/map/map';
 
 function initGraphCSV(data: Array<Array<string>>) {
     const graph = new Graph();
@@ -29,7 +29,7 @@ function initGraphMTX(data: Array<Array<string>>, amount: number) {
     return graph.graph;
 }
 
-async function main(): Promise<void> {
+async function project1(): Promise<void> {
     let utils: any = new Utils();
     let graph: Array<Array<number>> = [];
     let data = [];
@@ -44,6 +44,18 @@ async function main(): Promise<void> {
     pagerank.ranking();
     console.log(pagerank.rank);
     console.log(pagerank.topWeight);
+}
+
+async function project2(): Promise<void> {
+    let map = new Map();
+    for (let i: number = 0; i < 20; i++) {
+        map.addNode(Math.floor(Math.random() * 30), Math.floor(Math.random() * 30));
+    }
+}
+
+async function main(): Promise<void> {
+    // project1();
+    project2();
 }
 
 main();

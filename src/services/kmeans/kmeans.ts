@@ -10,8 +10,9 @@ class KMeans {
     init(): void {
         for (let i: number = 0; i < this.k; i++) {
             this.clustersList.push([]);
-            this.centersList.push([]);
+            this.centersList.push([Math.floor(Math.random() * 30), Math.floor(Math.random() * 30)]);
         }
+        console.log(this.centersList);
     }
     clustering(): void {}
     get clusters(): Array<Array<number>> {

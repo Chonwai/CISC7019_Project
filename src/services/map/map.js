@@ -9,7 +9,7 @@ var Map = /** @class */ (function() {
         this.map.push([x, y]);
         this.amount++;
     };
-    Object.defineProperty(Map.prototype, 'maps', {
+    Object.defineProperty(Map.prototype, 'getmap', {
         get: function() {
             return this.map;
         },

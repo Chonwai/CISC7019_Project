@@ -139,6 +139,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var utils_1 = __importDefault(require('./src/services/utils/utils'));
 var graph_1 = __importDefault(require('./src/services/graph/graph'));
 var pagerank_1 = __importDefault(require('./src/services/pagerank/pagerank'));
+var map_1 = __importDefault(require('./src/services/map/map'));
 function initGraphCSV(data) {
     var graph = new graph_1.default();
     for (var i = 0; i < data.length; i++) {
@@ -163,7 +164,7 @@ function initGraphMTX(data, amount) {
     }
     return graph.graph;
 }
-function main() {
+function project1() {
     return __awaiter(this, void 0, void 0, function() {
         var utils, graph, data, pagerank;
         return __generator(this, function(_a) {
@@ -186,6 +187,28 @@ function main() {
                     console.log(pagerank.topWeight);
                     return [2 /*return*/];
             }
+        });
+    });
+}
+function project2() {
+    return __awaiter(this, void 0, void 0, function() {
+        var map, i;
+        return __generator(this, function(_a) {
+            map = new map_1.default();
+            for (i = 0; i < 20; i++) {
+                map.addNode(Math.floor(Math.random() * 30), Math.floor(Math.random() * 30));
+            }
+            console.log(map.getmap);
+            return [2 /*return*/];
+        });
+    });
+}
+function main() {
+    return __awaiter(this, void 0, void 0, function() {
+        return __generator(this, function(_a) {
+            // project1();
+            project2();
+            return [2 /*return*/];
         });
     });
 }
