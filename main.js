@@ -139,7 +139,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var utils_1 = __importDefault(require('./src/services/utils/utils'));
 var graph_1 = __importDefault(require('./src/services/graph/graph'));
 var pagerank_1 = __importDefault(require('./src/services/pagerank/pagerank'));
-function initGraph(data) {
+function initGraphCSV(data) {
     var graph = new graph_1.default();
     for (var i = 0; i < data.length; i++) {
         graph.addNode(i);
@@ -150,6 +150,16 @@ function initGraph(data) {
                 graph.addEdge(i, j);
             }
         }
+    }
+    return graph.graph;
+}
+function initGraphMTX(data, amount) {
+    var graph = new graph_1.default();
+    for (var i = 0; i < amount; i++) {
+        graph.addNode(i);
+    }
+    for (var i = 0; i < data.length; i++) {
+        graph.addEdge(parseInt(data[i][0]), parseInt(data[i][1]));
     }
     return graph.graph;
 }
@@ -165,7 +175,10 @@ function main() {
                     return [4 /*yield*/, utils.readCSVData('./src/data/Facebook_Data.csv')];
                 case 1:
                     data = _a.sent();
-                    graph = initGraph(data);
+                    // data = await utils.readMTXData('./src/data/socfb-UChicago30.mtx');
+                    graph = initGraphCSV(data);
+                    // graph = initGraphMTX(data, 6591);
+                    console.log(graph.length);
                     pagerank = new pagerank_1.default(graph, 100);
                     pagerank.init();
                     pagerank.ranking();
