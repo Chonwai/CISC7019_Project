@@ -12,7 +12,6 @@ var KMeans = /** @class */ (function() {
         this.map = [];
         this.clustersList = [];
         this.centersList = [];
-        this.maxIteration = 100;
         this.k = k;
         this.map = map;
         this.maxIteration = maxIteration;
@@ -21,18 +20,25 @@ var KMeans = /** @class */ (function() {
         for (var i = 0; i < this.k; i++) {
             this.clustersList.push([]);
         }
-        this.generateInitCenters();
+        this.generateCentersList();
     };
-    KMeans.prototype.generateInitCenters = function() {
+    KMeans.prototype.generateCentersList = function() {
         for (var i = 0; i < this.k; i++) {
             this.centersList.push([Math.floor(Math.random() * 30), Math.floor(Math.random() * 30)]);
         }
         console.log(this.centersList);
     };
+    KMeans.prototype.generateClusterList = function() {
+        var res = [];
+        for (var i = 0; i < this.k; i++) {
+            res.push([]);
+        }
+        return res;
+    };
     KMeans.prototype.clustering = function() {
         var iteration = 0;
         while (iteration < this.maxIteration) {
-            var tempClustersList = [];
+            var tempClustersList = this.generateClusterList();
             for (var i = 0; i < this.map.length; i++) {
                 var minDistance = 999;
                 var tempClusterNumber = 0;
@@ -49,7 +55,9 @@ var KMeans = /** @class */ (function() {
                 }
                 tempClustersList[tempClusterNumber].push(i);
             }
-            this.updateCenters(tempClustersList);
+            console.log(tempClustersList);
+            iteration++;
+            // this.updateCenters(tempClustersList);
         }
     };
     KMeans.prototype.updateCenters = function(clustersList) {

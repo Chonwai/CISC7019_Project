@@ -1,9 +1,9 @@
 class KMeans {
-    k: number = 3;
-    map: Array<Array<number>> = [];
-    clustersList: Array<Array<number>> = [];
-    centersList: Array<Array<number>> = [];
-    maxIteration: number = 100;
+    private k: number = 3;
+    private map: Array<Array<number>> = [];
+    private clustersList: Array<Array<number>> = [];
+    private centersList: Array<Array<number>> = [];
+    private maxIteration: number;
     constructor(map: Array<Array<number>>, k: number = 3, maxIteration: number = 100) {
         this.k = k;
         this.map = map;
@@ -13,18 +13,25 @@ class KMeans {
         for (let i: number = 0; i < this.k; i++) {
             this.clustersList.push([]);
         }
-        this.generateInitCenters();
+        this.generateCentersList();
     }
-    generateInitCenters(): void {
+    generateCentersList(): void {
         for (let i: number = 0; i < this.k; i++) {
             this.centersList.push([Math.floor(Math.random() * 30), Math.floor(Math.random() * 30)]);
         }
         console.log(this.centersList);
     }
+    generateClusterList(): Array<Array<number>> {
+        let res: Array<Array<number>> = [];
+        for (let i: number = 0; i < this.k; i++) {
+            res.push([]);
+        }
+        return res;
+    }
     clustering(): void {
         let iteration: number = 0;
         while (iteration < this.maxIteration) {
-            let tempClustersList: Array<Array<number>> = [];
+            let tempClustersList: Array<Array<number>> = this.generateClusterList();
             for (let i: number = 0; i < this.map.length; i++) {
                 let minDistance: number = 999;
                 let tempClusterNumber: number = 0;
@@ -41,7 +48,9 @@ class KMeans {
                 }
                 tempClustersList[tempClusterNumber].push(i);
             }
-            this.updateCenters(tempClustersList);
+            console.log(tempClustersList);
+            iteration++;
+            // this.updateCenters(tempClustersList);
         }
     }
     private updateCenters(clustersList: Array<Array<number>>): void {
