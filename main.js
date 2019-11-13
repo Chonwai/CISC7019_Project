@@ -140,6 +140,7 @@ var utils_1 = __importDefault(require('./src/services/utils/utils'));
 var graph_1 = __importDefault(require('./src/services/graph/graph'));
 var pagerank_1 = __importDefault(require('./src/services/pagerank/pagerank'));
 var map_1 = __importDefault(require('./src/services/map/map'));
+var kmeans_1 = __importDefault(require('./src/services/kmeans/kmeans'));
 function initGraphCSV(data) {
     var graph = new graph_1.default();
     for (var i = 0; i < data.length; i++) {
@@ -192,13 +193,14 @@ function project1() {
 }
 function project2() {
     return __awaiter(this, void 0, void 0, function() {
-        var map, i;
+        var map, i, kmeans;
         return __generator(this, function(_a) {
             map = new map_1.default();
             for (i = 0; i < 20; i++) {
                 map.addNode(Math.floor(Math.random() * 30), Math.floor(Math.random() * 30));
             }
-            console.log(map.getmap);
+            kmeans = new kmeans_1.default(map.getmap, 3, 100);
+            kmeans.init();
             return [2 /*return*/];
         });
     });

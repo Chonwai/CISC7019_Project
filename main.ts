@@ -2,6 +2,7 @@ import Utils from './src/services/utils/utils';
 import Graph from './src/services/graph/graph';
 import PageRank from './src/services/pagerank/pagerank';
 import Map from './src/services/map/map';
+import KMeans from './src/services/kmeans/kmeans';
 
 function initGraphCSV(data: Array<Array<string>>) {
     const graph = new Graph();
@@ -51,6 +52,8 @@ async function project2(): Promise<void> {
     for (let i: number = 0; i < 20; i++) {
         map.addNode(Math.floor(Math.random() * 30), Math.floor(Math.random() * 30));
     }
+    let kmeans = new KMeans(map.getmap, 3, 100);
+    kmeans.init();
 }
 
 async function main(): Promise<void> {
