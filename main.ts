@@ -49,12 +49,15 @@ async function project1(): Promise<void> {
 
 async function project2(): Promise<void> {
     let map = new Map();
-    for (let i: number = 0; i < 30; i++) {
-        map.addNode(Math.floor(Math.random() * 30), Math.floor(Math.random() * 30));
+    for (let i: number = 0; i < 1000; i++) {
+        map.addNode(Math.floor(Math.random() * 320), Math.floor(Math.random() * 320));
     }
-    let kmeans = new KMeans(map.getmap, 4, 1);
+    let kmeans = new KMeans(map.getmap, 4, 100);
     kmeans.init();
     kmeans.clustering();
+    console.log(kmeans.centers);
+    console.log(kmeans.clusters);
+    console.log(kmeans.maps);
 }
 
 async function main(): Promise<void> {

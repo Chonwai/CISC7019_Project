@@ -17,9 +17,12 @@ class KMeans {
     }
     generateCentersList(): void {
         for (let i: number = 0; i < this.k; i++) {
-            this.centersList.push([Math.floor(Math.random() * 30), Math.floor(Math.random() * 30)]);
+            this.centersList.push([
+                Math.floor(Math.random() * 320),
+                Math.floor(Math.random() * 320)
+            ]);
         }
-        console.log(this.centersList);
+        console.log(`Randomly generate ${this.k} central points: \n`, this.centersList);
     }
     generateClusterList(): Array<Array<number>> {
         let res: Array<Array<number>> = [];
@@ -48,16 +51,36 @@ class KMeans {
                 }
                 tempClustersList[tempClusterNumber].push(i);
             }
-            console.log(tempClustersList);
             iteration++;
-            // this.updateCenters(tempClustersList);
+            this.updateCenters(tempClustersList);
+            this.updateCluster(tempClustersList);
         }
     }
     private updateCenters(clustersList: Array<Array<number>>): void {
-        for (let i: number = 0; i < clustersList.length; i++) {}
+        for (let i: number = 0; i < clustersList.length; i++) {
+            let meanX: number = 0;
+            let meanY: number = 0;
+            for (let j: number = 0; j < clustersList[i].length; j++) {
+                meanX += this.map[clustersList[i][j]][0];
+                meanY += this.map[clustersList[i][j]][1];
+            }
+            meanX = meanX / clustersList[i].length;
+            meanY = meanY / clustersList[i].length;
+            this.centersList[i][0] = meanX;
+            this.centersList[i][1] = meanY;
+        }
+    }
+    private updateCluster(clustersList: Array<Array<number>>): void {
+        this.clustersList = clustersList;
     }
     get clusters(): Array<Array<number>> {
         return this.clustersList;
+    }
+    get centers(): Array<Array<number>> {
+        return this.centersList;
+    }
+    get maps(): Array<Array<number>> {
+        return this.map;
     }
 }
 

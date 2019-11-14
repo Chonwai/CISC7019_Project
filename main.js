@@ -196,12 +196,15 @@ function project2() {
         var map, i, kmeans;
         return __generator(this, function(_a) {
             map = new map_1.default();
-            for (i = 0; i < 30; i++) {
-                map.addNode(Math.floor(Math.random() * 30), Math.floor(Math.random() * 30));
+            for (i = 0; i < 1000; i++) {
+                map.addNode(Math.floor(Math.random() * 320), Math.floor(Math.random() * 320));
             }
-            kmeans = new kmeans_1.default(map.getmap, 4, 1);
+            kmeans = new kmeans_1.default(map.getmap, 4, 100);
             kmeans.init();
             kmeans.clustering();
+            console.log(kmeans.centers);
+            console.log(kmeans.clusters);
+            console.log(kmeans.maps);
             return [2 /*return*/];
         });
     });

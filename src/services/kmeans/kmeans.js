@@ -24,9 +24,12 @@ var KMeans = /** @class */ (function() {
     };
     KMeans.prototype.generateCentersList = function() {
         for (var i = 0; i < this.k; i++) {
-            this.centersList.push([Math.floor(Math.random() * 30), Math.floor(Math.random() * 30)]);
+            this.centersList.push([
+                Math.floor(Math.random() * 320),
+                Math.floor(Math.random() * 320)
+            ]);
         }
-        console.log(this.centersList);
+        console.log('Randomly generate ' + this.k + ' central points: \n', this.centersList);
     };
     KMeans.prototype.generateClusterList = function() {
         var res = [];
@@ -55,17 +58,45 @@ var KMeans = /** @class */ (function() {
                 }
                 tempClustersList[tempClusterNumber].push(i);
             }
-            console.log(tempClustersList);
             iteration++;
-            // this.updateCenters(tempClustersList);
+            this.updateCenters(tempClustersList);
+            this.updateCluster(tempClustersList);
         }
     };
     KMeans.prototype.updateCenters = function(clustersList) {
-        for (var i = 0; i < clustersList.length; i++) {}
+        for (var i = 0; i < clustersList.length; i++) {
+            var meanX = 0;
+            var meanY = 0;
+            for (var j = 0; j < clustersList[i].length; j++) {
+                meanX += this.map[clustersList[i][j]][0];
+                meanY += this.map[clustersList[i][j]][1];
+            }
+            meanX = meanX / clustersList[i].length;
+            meanY = meanY / clustersList[i].length;
+            this.centersList[i][0] = meanX;
+            this.centersList[i][1] = meanY;
+        }
+    };
+    KMeans.prototype.updateCluster = function(clustersList) {
+        this.clustersList = clustersList;
     };
     Object.defineProperty(KMeans.prototype, 'clusters', {
         get: function() {
             return this.clustersList;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KMeans.prototype, 'centers', {
+        get: function() {
+            return this.centersList;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KMeans.prototype, 'maps', {
+        get: function() {
+            return this.map;
         },
         enumerable: true,
         configurable: true
