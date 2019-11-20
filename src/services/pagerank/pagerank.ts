@@ -6,7 +6,7 @@ class PageRank {
     maxIteration: number = 100;
     d: number = 0.85;
     rankingList: Array<number> = [];
-    constructor(graph: Array<Array<number>> = [], maxIteration: number = 0, d: number = 0.85) {
+    constructor(graph: Array<Array<number>> = [], maxIteration: number = 100, d: number = 0.85) {
         this.graph = graph;
         this.maxIteration = maxIteration;
         this.d = d;

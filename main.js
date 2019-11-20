@@ -211,9 +211,10 @@ function project2() {
 }
 function main() {
     return __awaiter(this, void 0, void 0, function() {
+        var utils;
         return __generator(this, function(_a) {
-            // project1();
-            project2();
+            utils = new utils_1.default();
+            console.log(utils.topicList);
             return [2 /*return*/];
         });
     });

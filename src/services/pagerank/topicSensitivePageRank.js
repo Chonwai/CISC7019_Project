@@ -31,9 +31,30 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var pagerank_1 = __importDefault(require('./pagerank'));
 var TopicSensitivePageRank = /** @class */ (function(_super) {
     __extends(TopicSensitivePageRank, _super);
-    function TopicSensitivePageRank() {
-        return _super.call(this) || this;
+    function TopicSensitivePageRank(graph, topic, maxIteration, d) {
+        if (graph === void 0) {
+            graph = [];
+        }
+        if (topic === void 0) {
+            topic = [];
+        }
+        if (maxIteration === void 0) {
+            maxIteration = 100;
+        }
+        if (d === void 0) {
+            d = 0.85;
+        }
+        var _this = _super.call(this, graph, maxIteration) || this;
+        _this.topicList = [];
+        _this.allTopic = [];
+        _this.allTopicRanking = [];
+        _this.graph = graph;
+        _this.maxIteration = maxIteration;
+        _this.topicList = topic;
+        return _this;
     }
+    TopicSensitivePageRank.prototype.init = function() {};
+    TopicSensitivePageRank.prototype.ranking = function() {};
     return TopicSensitivePageRank;
 })(pagerank_1.default);
 exports.default = TopicSensitivePageRank;

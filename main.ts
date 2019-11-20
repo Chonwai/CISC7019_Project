@@ -62,7 +62,9 @@ async function project2(): Promise<void> {
 
 async function main(): Promise<void> {
     // project1();
-    project2();
+    // project2();
+    let utils: any = new Utils();
+    console.log(utils.topicList);
 }
 
 main();

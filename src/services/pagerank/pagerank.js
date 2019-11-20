@@ -12,7 +12,7 @@ var PageRank = /** @class */ (function() {
             graph = [];
         }
         if (maxIteration === void 0) {
-            maxIteration = 0;
+            maxIteration = 100;
         }
         if (d === void 0) {
             d = 0.85;

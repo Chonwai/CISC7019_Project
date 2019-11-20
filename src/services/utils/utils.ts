@@ -1,9 +1,26 @@
 import fs from 'fs';
 
 class utils {
+    private _topicList: Array<string> = [
+        'Arts',
+        'Games',
+        'News',
+        'Regional',
+        'Society',
+        'Business',
+        'Health',
+        'Recreation',
+        'Science',
+        'Sports',
+        'Computers',
+        'Home',
+        'Reference',
+        'Shopping',
+        'Kids',
+        'Other'
+    ];
     constructor() {}
-
-    readMTXData(path: string = '') {
+    public readMTXData(path: string = '') {
         let data: Array<string> = [];
         let relationMatrix: Array<Array<string>> = [];
         let res = fs.readFileSync(path);
@@ -15,8 +32,7 @@ class utils {
         }
         return relationMatrix;
     }
-
-    readCSVData(path: string = ''): Array<Array<string>> {
+    public readCSVData(path: string = ''): Array<Array<string>> {
         let data: Array<string> = [];
         let relationMatrix: Array<Array<string>> = [];
         let res = fs.readFileSync(path);
@@ -29,7 +45,7 @@ class utils {
         }
         return relationMatrix;
     }
-    getMaxAndPos(array: Array<number>): object {
+    public getMaxAndPos(array: Array<number>): object {
         let position: number = 0;
         let maxVal: number = 0;
         for (let i: number = 0; i < array.length; i++) {
@@ -39,6 +55,9 @@ class utils {
             }
         }
         return { maximun: maxVal, position: position };
+    }
+    public get topicList(): Array<string> {
+        return this._topicList;
     }
 }
 

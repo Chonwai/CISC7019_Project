@@ -7,7 +7,26 @@ var __importDefault =
 Object.defineProperty(exports, '__esModule', { value: true });
 var fs_1 = __importDefault(require('fs'));
 var utils = /** @class */ (function() {
-    function utils() {}
+    function utils() {
+        this._topicList = [
+            'Arts',
+            'Games',
+            'News',
+            'Regional',
+            'Society',
+            'Business',
+            'Health',
+            'Recreation',
+            'Science',
+            'Sports',
+            'Computers',
+            'Home',
+            'Reference',
+            'Shopping',
+            'Kids',
+            'Other'
+        ];
+    }
     utils.prototype.readMTXData = function(path) {
         if (path === void 0) {
             path = '';
@@ -50,6 +69,13 @@ var utils = /** @class */ (function() {
         }
         return { maximun: maxVal, position: position };
     };
+    Object.defineProperty(utils.prototype, 'topicList', {
+        get: function() {
+            return this._topicList;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return utils;
 })();
 exports.default = utils;
