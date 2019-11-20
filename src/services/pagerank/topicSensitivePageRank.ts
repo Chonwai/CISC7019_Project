@@ -15,8 +15,8 @@ class TopicSensitivePageRank extends PageRank {
         this.maxIteration = maxIteration;
         this.topicList = topic;
     }
-    init(): void {}
-    ranking(): void {}
+    public init(): void {}
+    public ranking(searchTopic: string = 'Science'): void {}
 }
 
 export default TopicSensitivePageRank;

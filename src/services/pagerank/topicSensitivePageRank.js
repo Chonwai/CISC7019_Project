@@ -54,7 +54,11 @@ var TopicSensitivePageRank = /** @class */ (function(_super) {
         return _this;
     }
     TopicSensitivePageRank.prototype.init = function() {};
-    TopicSensitivePageRank.prototype.ranking = function() {};
+    TopicSensitivePageRank.prototype.ranking = function(searchTopic) {
+        if (searchTopic === void 0) {
+            searchTopic = 'Science';
+        }
+    };
     return TopicSensitivePageRank;
 })(pagerank_1.default);
 exports.default = TopicSensitivePageRank;

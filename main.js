@@ -141,10 +141,14 @@ var graph_1 = __importDefault(require('./src/services/graph/graph'));
 var pagerank_1 = __importDefault(require('./src/services/pagerank/pagerank'));
 var map_1 = __importDefault(require('./src/services/map/map'));
 var kmeans_1 = __importDefault(require('./src/services/kmeans/kmeans'));
+var topicSensitivePageRank_1 = __importDefault(
+    require('./src/services/pagerank/topicSensitivePageRank')
+);
 function initGraphCSV(data) {
     var graph = new graph_1.default();
+    var utils = new utils_1.default();
     for (var i = 0; i < data.length; i++) {
-        graph.addNode(i);
+        graph.addNode(i, utils.topicList[Math.floor(Math.random() * 16)]);
     }
     for (var i = 0; i < data.length; i++) {
         for (var j = 0; j < data[i].length; j++) {
@@ -155,19 +159,9 @@ function initGraphCSV(data) {
     }
     return graph.graph;
 }
-function initGraphMTX(data, amount) {
-    var graph = new graph_1.default();
-    for (var i = 0; i < amount; i++) {
-        graph.addNode(i);
-    }
-    for (var i = 0; i < data.length; i++) {
-        graph.addEdge(parseInt(data[i][0]), parseInt(data[i][1]));
-    }
-    return graph.graph;
-}
 function project1() {
     return __awaiter(this, void 0, void 0, function() {
-        var utils, graph, data, pagerank;
+        var utils, graph, data, pagerank, topicSensitivePageRank;
         return __generator(this, function(_a) {
             switch (_a.label) {
                 case 0:
@@ -177,15 +171,18 @@ function project1() {
                     return [4 /*yield*/, utils.readCSVData('./src/data/Facebook_Data.csv')];
                 case 1:
                     data = _a.sent();
-                    // data = await utils.readMTXData('./src/data/socfb-UChicago30.mtx');
                     graph = initGraphCSV(data);
-                    // graph = initGraphMTX(data, 6591);
                     console.log(graph.length);
+                    console.log('Normal PageRank:');
                     pagerank = new pagerank_1.default(graph, 100);
                     pagerank.init();
                     pagerank.ranking();
                     console.log(pagerank.rank);
                     console.log(pagerank.topWeight);
+                    console.log('\nTopic Sensitive PageRank:');
+                    topicSensitivePageRank = new topicSensitivePageRank_1.default();
+                    topicSensitivePageRank.init();
+                    topicSensitivePageRank.ranking();
                     return [2 /*return*/];
             }
         });
@@ -213,8 +210,8 @@ function main() {
     return __awaiter(this, void 0, void 0, function() {
         var utils;
         return __generator(this, function(_a) {
+            project1();
             utils = new utils_1.default();
-            console.log(utils.topicList);
             return [2 /*return*/];
         });
     });
