@@ -48,9 +48,6 @@ var TopicSensitivePageRank = /** @class */ (function(_super) {
             d = 0.85;
         }
         var _this = _super.call(this) || this;
-        // private topicList: Array<string> = [];
-        _this.allTopic = [];
-        _this.allTopicRanking = [];
         _this.S = 0;
         _this._targetTopic = 'Other';
         _this.targetNodesList = [];

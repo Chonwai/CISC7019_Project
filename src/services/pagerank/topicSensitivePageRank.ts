@@ -1,9 +1,6 @@
 import PageRank from './pagerank';
 
 class TopicSensitivePageRank extends PageRank {
-    // private topicList: Array<string> = [];
-    private allTopic = [];
-    private allTopicRanking = [];
     private S: number = 0;
     private _targetTopic: string = 'Other';
     private targetNodesList: Array<number> = [];

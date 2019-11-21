@@ -161,18 +161,16 @@ function initGraphCSV(data) {
 }
 function project1() {
     return __awaiter(this, void 0, void 0, function() {
-        var utils, nodes, data, graph, pagerank, topicSensitivePageRank;
+        var utils, data, graph, pagerank, topicSensitivePageRank;
         return __generator(this, function(_a) {
             switch (_a.label) {
                 case 0:
                     utils = new utils_1.default();
-                    nodes = [];
                     data = [];
                     return [4 /*yield*/, utils.readCSVData('./src/data/Facebook_Data.csv')];
                 case 1:
                     data = _a.sent();
                     graph = initGraphCSV(data);
-                    // console.log(graph.graph);
                     console.log('Normal PageRank:');
                     pagerank = new pagerank_1.default(
                         graph.graph,

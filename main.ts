@@ -23,12 +23,9 @@ function initGraphCSV(data: Array<Array<string>>) {
 
 async function project1(): Promise<void> {
     let utils: Utils = new Utils();
-    // let graph: Array<Array<number>> = [];
-    let nodes: Array<number> = [];
     let data = [];
     data = await utils.readCSVData('./src/data/Facebook_Data.csv');
     const graph: Graph = initGraphCSV(data);
-    // console.log(graph.graph);
 
     console.log('Normal PageRank:');
     let pagerank: PageRank = new PageRank(graph.graph, graph.nodeList, graph.topicList, 100);
@@ -67,7 +64,6 @@ async function main(): Promise<void> {
     project1();
     // project2();
     let utils: any = new Utils();
-    // console.log(utils.topicList[Math.floor(Math.random() * 16)]);
 }
 
 main();
