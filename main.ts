@@ -18,28 +18,36 @@ function initGraphCSV(data: Array<Array<string>>) {
             }
         }
     }
-    return graph.graph;
+    return graph;
 }
 
 async function project1(): Promise<void> {
     let utils: Utils = new Utils();
-    let graph: Array<Array<number>> = [];
+    // let graph: Array<Array<number>> = [];
+    let nodes: Array<number> = [];
     let data = [];
     data = await utils.readCSVData('./src/data/Facebook_Data.csv');
-    graph = initGraphCSV(data);
-    console.log(graph.length);
+    const graph: Graph = initGraphCSV(data);
+    // console.log(graph.graph);
 
     console.log('Normal PageRank:');
-    let pagerank: PageRank = new PageRank(graph, 100);
+    let pagerank: PageRank = new PageRank(graph.graph, graph.nodeList, graph.topicList, 100);
     pagerank.init();
     pagerank.ranking();
-    console.log(pagerank.rank);
-    console.log(pagerank.topWeight);
+    console.log(pagerank.topN(5));
 
     console.log('\nTopic Sensitive PageRank:');
-    const topicSensitivePageRank: TopicSensitivePageRank = new TopicSensitivePageRank();
+    const topicSensitivePageRank: TopicSensitivePageRank = new TopicSensitivePageRank(
+        graph.graph,
+        graph.nodeList,
+        graph.topicList,
+        100
+    );
     topicSensitivePageRank.init();
+    topicSensitivePageRank.searchTopic = 'Science';
+    topicSensitivePageRank.calculateS();
     topicSensitivePageRank.ranking();
+    console.log(topicSensitivePageRank.topN(5));
 }
 
 async function project2(): Promise<void> {

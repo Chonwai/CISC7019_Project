@@ -157,32 +157,44 @@ function initGraphCSV(data) {
             }
         }
     }
-    return graph.graph;
+    return graph;
 }
 function project1() {
     return __awaiter(this, void 0, void 0, function() {
-        var utils, graph, data, pagerank, topicSensitivePageRank;
+        var utils, nodes, data, graph, pagerank, topicSensitivePageRank;
         return __generator(this, function(_a) {
             switch (_a.label) {
                 case 0:
                     utils = new utils_1.default();
-                    graph = [];
+                    nodes = [];
                     data = [];
                     return [4 /*yield*/, utils.readCSVData('./src/data/Facebook_Data.csv')];
                 case 1:
                     data = _a.sent();
                     graph = initGraphCSV(data);
-                    console.log(graph.length);
+                    // console.log(graph.graph);
                     console.log('Normal PageRank:');
-                    pagerank = new pagerank_1.default(graph, 100);
+                    pagerank = new pagerank_1.default(
+                        graph.graph,
+                        graph.nodeList,
+                        graph.topicList,
+                        100
+                    );
                     pagerank.init();
                     pagerank.ranking();
-                    console.log(pagerank.rank);
-                    console.log(pagerank.topWeight);
+                    console.log(pagerank.topN(5));
                     console.log('\nTopic Sensitive PageRank:');
-                    topicSensitivePageRank = new topicSensitivePageRank_1.default();
+                    topicSensitivePageRank = new topicSensitivePageRank_1.default(
+                        graph.graph,
+                        graph.nodeList,
+                        graph.topicList,
+                        100
+                    );
                     topicSensitivePageRank.init();
+                    topicSensitivePageRank.searchTopic = 'Science';
+                    topicSensitivePageRank.calculateS();
                     topicSensitivePageRank.ranking();
+                    console.log(topicSensitivePageRank.topN(5));
                     return [2 /*return*/];
             }
         });
