@@ -1,3 +1,5 @@
+import Utils from '../utils/utils';
+
 class KMeans {
     private k: number = 3;
     private map: Array<Array<number>> = [];
@@ -9,29 +11,70 @@ class KMeans {
         this.map = map;
         this.maxIteration = maxIteration;
     }
-    init(): void {
+    public init(): void {
         for (let i: number = 0; i < this.k; i++) {
             this.clustersList.push([]);
         }
-        this.generateCentersList();
     }
-    generateCentersList(): void {
+    public generateRandomCentersList(): void {
         for (let i: number = 0; i < this.k; i++) {
-            this.centersList.push([
-                Math.floor(Math.random() * 320),
-                Math.floor(Math.random() * 320)
-            ]);
+            this.centersList.push([Math.floor(Math.random() * 15), Math.floor(Math.random() * 15)]);
         }
         console.log(`Randomly generate ${this.k} central points: \n`, this.centersList);
     }
-    generateClusterList(): Array<Array<number>> {
+    public generateBetterCentersList(): void {
+        let utils: Utils = new Utils();
+        for (let i: number = 0; i < this.k; i++) {
+            let maxDistance: number = 0;
+            let maxPos: number = 0;
+            if (i == 0) {
+                this.centersList.push(this.map[Math.floor(Math.random() * this.map.length)]);
+            } else if (i == 1) {
+                for (let j: number = 0; j < this.centersList.length; j++) {
+                    for (let k: number = 0; k < this.map.length; k++) {
+                        if (
+                            utils.twoPointsDistance(this.centersList[j], this.map[k]) > maxDistance
+                        ) {
+                            maxDistance = utils.twoPointsDistance(this.centersList[j], this.map[k]);
+                            maxPos = k;
+                        }
+                    }
+                }
+                this.centersList.push(this.map[maxPos]);
+            } else if (i > 1) {
+                let compareArr: Array<Array<number>> = [];
+                for (let j: number = 0; j < this.centersList.length; j++) {
+                    compareArr.push([]);
+                    for (let k: number = 0; k < this.map.length; k++) {
+                        compareArr[j].push(
+                            utils.twoPointsDistance(this.centersList[j], this.map[k])
+                        );
+                    }
+                }
+                let maxSum: number = 0;
+                for (let l: number = 0; l < this.map.length; l++) {
+                    let tempSumDistance: number = 0;
+                    for (let m: number = 0; m < this.centersList.length; m++) {
+                        tempSumDistance += compareArr[m][l];
+                    }
+                    if (tempSumDistance > maxSum) {
+                        maxSum = tempSumDistance;
+                        maxPos = l;
+                    }
+                }
+                this.centersList.push(this.maps[maxPos]);
+            }
+        }
+        console.log(`Optimize generate ${this.k} central points: \n`, this.centersList);
+    }
+    public generateClusterList(): Array<Array<number>> {
         let res: Array<Array<number>> = [];
         for (let i: number = 0; i < this.k; i++) {
             res.push([]);
         }
         return res;
     }
-    clustering(): void {
+    public clustering(): void {
         let iteration: number = 0;
         while (iteration < this.maxIteration) {
             let tempClustersList: Array<Array<number>> = this.generateClusterList();
@@ -73,13 +116,13 @@ class KMeans {
     private updateCluster(clustersList: Array<Array<number>>): void {
         this.clustersList = clustersList;
     }
-    get clusters(): Array<Array<number>> {
+    public get clusters(): Array<Array<number>> {
         return this.clustersList;
     }
-    get centers(): Array<Array<number>> {
+    public get centers(): Array<Array<number>> {
         return this.centersList;
     }
-    get maps(): Array<Array<number>> {
+    public get maps(): Array<Array<number>> {
         return this.map;
     }
 }

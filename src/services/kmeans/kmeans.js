@@ -1,5 +1,11 @@
 'use strict';
+var __importDefault =
+    (this && this.__importDefault) ||
+    function(mod) {
+        return mod && mod.__esModule ? mod : { default: mod };
+    };
 Object.defineProperty(exports, '__esModule', { value: true });
+var utils_1 = __importDefault(require('../utils/utils'));
 var KMeans = /** @class */ (function() {
     function KMeans(map, k, maxIteration) {
         if (k === void 0) {
@@ -20,16 +26,57 @@ var KMeans = /** @class */ (function() {
         for (var i = 0; i < this.k; i++) {
             this.clustersList.push([]);
         }
-        this.generateCentersList();
     };
-    KMeans.prototype.generateCentersList = function() {
+    KMeans.prototype.generateRandomCentersList = function() {
         for (var i = 0; i < this.k; i++) {
-            this.centersList.push([
-                Math.floor(Math.random() * 320),
-                Math.floor(Math.random() * 320)
-            ]);
+            this.centersList.push([Math.floor(Math.random() * 15), Math.floor(Math.random() * 15)]);
         }
         console.log('Randomly generate ' + this.k + ' central points: \n', this.centersList);
+    };
+    KMeans.prototype.generateBetterCentersList = function() {
+        var utils = new utils_1.default();
+        for (var i = 0; i < this.k; i++) {
+            var maxDistance = 0;
+            var maxPos = 0;
+            if (i == 0) {
+                this.centersList.push(this.map[Math.floor(Math.random() * this.map.length)]);
+            } else if (i == 1) {
+                for (var j = 0; j < this.centersList.length; j++) {
+                    for (var k = 0; k < this.map.length; k++) {
+                        if (
+                            utils.twoPointsDistance(this.centersList[j], this.map[k]) > maxDistance
+                        ) {
+                            maxDistance = utils.twoPointsDistance(this.centersList[j], this.map[k]);
+                            maxPos = k;
+                        }
+                    }
+                }
+                this.centersList.push(this.map[maxPos]);
+            } else if (i > 1) {
+                var compareArr = [];
+                for (var j = 0; j < this.centersList.length; j++) {
+                    compareArr.push([]);
+                    for (var k = 0; k < this.map.length; k++) {
+                        compareArr[j].push(
+                            utils.twoPointsDistance(this.centersList[j], this.map[k])
+                        );
+                    }
+                }
+                var maxSum = 0;
+                for (var l = 0; l < this.map.length; l++) {
+                    var tempSumDistance = 0;
+                    for (var m = 0; m < this.centersList.length; m++) {
+                        tempSumDistance += compareArr[m][l];
+                    }
+                    if (tempSumDistance > maxSum) {
+                        maxSum = tempSumDistance;
+                        maxPos = l;
+                    }
+                }
+                this.centersList.push(this.maps[maxPos]);
+            }
+        }
+        console.log('Optimize generate ' + this.k + ' central points: \n', this.centersList);
     };
     KMeans.prototype.generateClusterList = function() {
         var res = [];

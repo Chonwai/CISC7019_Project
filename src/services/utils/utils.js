@@ -69,6 +69,11 @@ var utils = /** @class */ (function() {
         }
         return { maximun: maxVal, position: position };
     };
+    utils.prototype.twoPointsDistance = function(p1, p2) {
+        var distance = 0;
+        distance = Math.sqrt(Math.pow(p1[0] - p2[0], 2) + Math.pow(p1[1] - p2[1], 2));
+        return distance;
+    };
     Object.defineProperty(utils.prototype, 'topicList', {
         get: function() {
             return this._topicList;

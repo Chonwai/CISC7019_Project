@@ -56,6 +56,11 @@ class utils {
         }
         return { maximun: maxVal, position: position };
     }
+    public twoPointsDistance(p1: Array<number>, p2: Array<number>): number {
+        let distance: number = 0;
+        distance = Math.sqrt(Math.pow(p1[0] - p2[0], 2) + Math.pow(p1[1] - p2[1], 2));
+        return distance;
+    }
     public get topicList(): Array<string> {
         return this._topicList;
     }

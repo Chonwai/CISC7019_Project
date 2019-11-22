@@ -226,18 +226,35 @@ function project1() {
 }
 function project2() {
     return __awaiter(this, void 0, void 0, function() {
-        var map, i, kmeans;
+        var map, kmeans2, kmeans1;
         return __generator(this, function(_a) {
             map = new map_1.default();
-            for (i = 0; i < 50; i++) {
-                map.addNode(Math.floor(Math.random() * 320), Math.floor(Math.random() * 320));
-            }
-            kmeans = new kmeans_1.default(map.getmap, 3, 100);
-            kmeans.init();
-            kmeans.clustering();
-            console.log(kmeans.centers);
-            console.log(kmeans.clusters);
-            console.log(kmeans.maps);
+            // for (let i: number = 0; i < 50; i++) {
+            //     map.addNode(Math.floor(Math.random() * 320), Math.floor(Math.random() * 320));
+            // }
+            map.addNode(4, 10);
+            map.addNode(7, 10);
+            map.addNode(4, 8);
+            map.addNode(6, 8);
+            map.addNode(12, 6);
+            map.addNode(10, 5);
+            map.addNode(3, 4);
+            map.addNode(11, 4);
+            map.addNode(9, 3);
+            map.addNode(12, 3);
+            map.addNode(2, 2);
+            map.addNode(5, 2);
+            kmeans2 = new kmeans_1.default(map.getmap, 3, 100);
+            kmeans2.init();
+            kmeans2.generateRandomCentersList();
+            kmeans2.clustering();
+            console.log(kmeans2.clusters);
+            console.log('\n');
+            kmeans1 = new kmeans_1.default(map.getmap, 3, 100);
+            kmeans1.init();
+            kmeans1.generateBetterCentersList();
+            kmeans1.clustering();
+            console.log(kmeans1.clusters);
             return [2 /*return*/];
         });
     });

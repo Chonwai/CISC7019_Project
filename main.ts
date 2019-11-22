@@ -76,15 +76,33 @@ async function project1(): Promise<void> {
 
 async function project2(): Promise<void> {
     let map = new Map();
-    for (let i: number = 0; i < 50; i++) {
-        map.addNode(Math.floor(Math.random() * 320), Math.floor(Math.random() * 320));
-    }
-    let kmeans = new KMeans(map.getmap, 3, 100);
-    kmeans.init();
-    kmeans.clustering();
-    console.log(kmeans.centers);
-    console.log(kmeans.clusters);
-    console.log(kmeans.maps);
+    // for (let i: number = 0; i < 50; i++) {
+    //     map.addNode(Math.floor(Math.random() * 320), Math.floor(Math.random() * 320));
+    // }
+    map.addNode(4, 10);
+    map.addNode(7, 10);
+    map.addNode(4, 8);
+    map.addNode(6, 8);
+    map.addNode(12, 6);
+    map.addNode(10, 5);
+    map.addNode(3, 4);
+    map.addNode(11, 4);
+    map.addNode(9, 3);
+    map.addNode(12, 3);
+    map.addNode(2, 2);
+    map.addNode(5, 2);
+
+    let kmeans2 = new KMeans(map.getmap, 3, 100);
+    kmeans2.init();
+    kmeans2.generateRandomCentersList();
+    kmeans2.clustering();
+    console.log(kmeans2.clusters);
+    console.log('\n');
+    let kmeans1 = new KMeans(map.getmap, 3, 100);
+    kmeans1.init();
+    kmeans1.generateBetterCentersList();
+    kmeans1.clustering();
+    console.log(kmeans1.clusters);
 }
 
 async function project3(): Promise<void> {
