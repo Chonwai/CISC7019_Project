@@ -3,16 +3,11 @@ import subprocess
 import logging
 
 
-def import_nodes(nodes_file):
-    """
-    Import the nodes from the file
-    """
-
+def importNodes(nodes_file):
     edges = []
     adjacency_matrix = {}
     number_nodes = 0
 
-    # Open the file
     with open(nodes_file, "r") as datafile:
         for line in datafile:
             node1, node2 = line.split()
@@ -22,7 +17,6 @@ def import_nodes(nodes_file):
             number_nodes = max(number_nodes, node1, node2)
 
     number_nodes += 1  # We only had the maximum index of the nodes
-    logging.info("Imported {} nodes with {} edges from {}".format(number_nodes, len(edges), nodes_file))
 
     # Initiate empty matrix
     adjacency_matrix = np.zeros((number_nodes, number_nodes))
@@ -32,15 +26,15 @@ def import_nodes(nodes_file):
         # The adjancency matrix is symmetric
         adjacency_matrix[node1][node2] = 1
         adjacency_matrix[node2][node1] = 1
+    
+    print("Graph edges:\n", edges);
 
     return (number_nodes, edges, adjacency_matrix)
 
 
-def degree_nodes(adjacency_matrix, number_nodes):
-    """
-    Compute the degree of each node
-    Returns the vector of degrees
-    """
+def degreeNodes(adjacency_matrix, number_nodes):
+    # Compute the degree of each node
+    # Returns the vector of degrees
 
     d = []
     for i in range(number_nodes):
@@ -49,49 +43,21 @@ def degree_nodes(adjacency_matrix, number_nodes):
     return d
 
 
-def print_graph(number_nodes, edges, partition, outputfile):
-    """
-    Writes a .gv file to use with dot
-    """
-    print(partition);
-    # with open("graph.gv", "w") as gv:
-    #     gv.write("strict graph communities {")
-
-    #     for node, community in enumerate(partition):
-    #         gv.write("node{} [color={}];".format(node, "red" if community else "blue"))
-
-    #     for node1, node2 in edges:
-    #         gv.write("node{} -- node{};".format(node1, node2))
-
-    #     gv.write("}")
-    #     gv.close()
-
-    # subprocess.call(["dot", "-Tpng", "graph.gv", "-o", outputfile])
-    # logging.warning("Wrote {} with the two communities.".format(outputfile))
-
-
 def algorithm(nodes_file):
-    """
-    The Spectral Partitioning Algorithm
-    """
+    # The Spectral Partitioning Algorithm
 
-    logging.warning("Computing Adjacency Matrix...")
+    number_nodes, edges, adjacency_matrix = importNodes(args.nodes_file)
+    print("\nAdjacency matrix:\n", adjacency_matrix)
 
-    number_nodes, edges, adjacency_matrix = import_nodes(args.nodes_file)
-    logging.debug("Adjacency matrix:\n", adjacency_matrix)
+    degrees = degreeNodes(adjacency_matrix, number_nodes)
+    print("\nDegrees:\n", degrees)
 
-    logging.warning("Computing the degree of each node...")
-    degrees = degree_nodes(adjacency_matrix, number_nodes)
-    logging.debug("Degrees: ", degrees)
-
-    logging.warning("Computing the Laplacian matrix...")
     laplacian_matrix = np.diag(degrees) - adjacency_matrix
-    logging.debug("Laplacian matrix:\n", laplacian_matrix)
+    print("\nLaplacian matrix:\n", laplacian_matrix)
 
-    logging.warning("Computing the eigenvectors and eigenvalues...")
     eigenvalues, eigenvectors = np.linalg.eigh(laplacian_matrix)
-
-    logging.info("Found eigenvalues: ", eigenvalues)
+    print("\nEigenvalues:\n", eigenvalues)
+    print("\nEigenvectors:\n", eigenvectors)
 
     # Index of the second eigenvalue
     index_fnzev = np.argsort(eigenvalues)[1]
@@ -112,16 +78,7 @@ def algorithm(nodes_file):
                 or node1 in nodes_in_B and node2 in nodes_in_A:
             edges_in_between.append(edge)
 
-    # Display the results
-    logging.warning("Partition computed: nbA={} nbB={} (total {}), {} edges in between".format(
-        len(nodes_in_A),
-        len(nodes_in_B),
-        number_nodes,
-        len(edges_in_between),
-    ))
-
-    return number_nodes, edges, partition
-
+    return number_nodes, edges, nodes_in_A, nodes_in_B
 
 if __name__ == '__main__':
     import argparse
@@ -141,10 +98,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Run the algorithm
-    number_nodes, edges, partition = algorithm(args.nodes_file)
+    number_nodes, edges, groupA, groupB = algorithm(args.nodes_file)
 
-    print(partition)
-
-    # if args.output_file:
-    #     # Print the graph
-    #     print_graph(number_nodes, edges, partition, outputfile=args.output_file)
+    print("\nGroup A:\n", groupA)
+    print("\nGroup B:\n", groupB)
