@@ -159,6 +159,32 @@ function initGraphCSV(data) {
     }
     return graph;
 }
+function initCluster() {
+    var graph = new graph_1.default();
+    graph.addNode(0, 'Null');
+    graph.addNode(1, 'Null');
+    graph.addNode(2, 'Null');
+    graph.addNode(3, 'Null');
+    graph.addNode(4, 'Null');
+    graph.addNode(5, 'Null');
+    graph.addEdge(0, 1);
+    graph.addEdge(0, 2);
+    graph.addEdge(0, 4);
+    graph.addEdge(1, 0);
+    graph.addEdge(1, 2);
+    graph.addEdge(2, 0);
+    graph.addEdge(2, 1);
+    graph.addEdge(2, 3);
+    graph.addEdge(3, 2);
+    graph.addEdge(3, 4);
+    graph.addEdge(3, 5);
+    graph.addEdge(4, 0);
+    graph.addEdge(4, 3);
+    graph.addEdge(4, 5);
+    graph.addEdge(5, 3);
+    graph.addEdge(5, 4);
+    return graph;
+}
 function project1() {
     return __awaiter(this, void 0, void 0, function() {
         var utils, data, graph, pagerank, topicSensitivePageRank;
@@ -203,10 +229,10 @@ function project2() {
         var map, i, kmeans;
         return __generator(this, function(_a) {
             map = new map_1.default();
-            for (i = 0; i < 1000; i++) {
+            for (i = 0; i < 50; i++) {
                 map.addNode(Math.floor(Math.random() * 320), Math.floor(Math.random() * 320));
             }
-            kmeans = new kmeans_1.default(map.getmap, 4, 100);
+            kmeans = new kmeans_1.default(map.getmap, 3, 100);
             kmeans.init();
             kmeans.clustering();
             console.log(kmeans.centers);
@@ -216,12 +242,22 @@ function project2() {
         });
     });
 }
+function project3() {
+    return __awaiter(this, void 0, void 0, function() {
+        var graph;
+        return __generator(this, function(_a) {
+            graph = initCluster();
+            console.log(graph.graph);
+            console.log(graph.nodeList);
+            return [2 /*return*/];
+        });
+    });
+}
 function main() {
     return __awaiter(this, void 0, void 0, function() {
-        var utils;
         return __generator(this, function(_a) {
-            project1();
-            utils = new utils_1.default();
+            // project1();
+            project2();
             return [2 /*return*/];
         });
     });
