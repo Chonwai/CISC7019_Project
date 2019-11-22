@@ -1,7 +1,5 @@
 import numpy as np
 import subprocess
-import logging
-
 
 def importNodes(nodes_file):
     edges = []
@@ -62,9 +60,6 @@ def algorithm(nodes_file):
     # Index of the second eigenvalue
     index_fnzev = np.argsort(eigenvalues)[1]
 
-    logging.debug("Eigenvector for #{} eigenvalue ({}): ".format(
-        index_fnzev, eigenvalues[index_fnzev]), eigenvectors[:, index_fnzev])
-
     # Partition on the sign of the eigenvector's coordinates
     partition = [val >= 0 for val in eigenvectors[:, index_fnzev]]
 
@@ -84,16 +79,12 @@ if __name__ == '__main__':
     import argparse
 
     # Configure logging
-    FORMAT = '%(asctime)s.%(msecs)03d %(message)s'
-    logging.basicConfig(format=FORMAT, datefmt='%H:%M:%S')
 
     parser = argparse.ArgumentParser(description="Compute the partition of a "
         "graph using the Spectral Partition Algorithm.")
 
     parser.add_argument('--nodes-file', '-f', help='the file containing the nodes',
-                        default='demo_nodes.txt')
-    parser.add_argument('--output-file', '-o', help='the filename of the'
-                        ' communities PNG graph to be written')
+                        default='graph.txt')
 
     args = parser.parse_args()
 
