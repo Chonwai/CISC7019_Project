@@ -1,5 +1,4 @@
 import numpy as np
-import subprocess
 
 def importNodes(nodes_file):
     edges = []
@@ -25,7 +24,7 @@ def importNodes(nodes_file):
         adjacency_matrix[node1][node2] = 1
         adjacency_matrix[node2][node1] = 1
     
-    print("Graph edges:\n", edges);
+    print("Graph edges:\n", edges)
 
     return (number_nodes, edges, adjacency_matrix)
 
@@ -78,8 +77,6 @@ def algorithm(nodes_file):
 if __name__ == '__main__':
     import argparse
 
-    # Configure logging
-
     parser = argparse.ArgumentParser(description="Compute the partition of a "
         "graph using the Spectral Partition Algorithm.")
 
@@ -88,7 +85,6 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    # Run the algorithm
     number_nodes, edges, groupA, groupB = algorithm(args.nodes_file)
 
     print("\nGroup A:\n", groupA)
