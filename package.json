@@ -22,7 +22,7 @@
     "dependencies": {
         "@types/lodash": "^4.14.145",
         "@types/node": "^12.12.6",
-        "lodash": "^4.17.15"
+        "lodash": "^4.17.19"
     },
     "devDependencies": {
         "prettier": "1.18.2",
